@@ -30,11 +30,16 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  // new: responsive inline height to avoid CSS interference
+  const [imageHeight, setImageHeight] = useState<number>(() =>
+    typeof window !== "undefined" && window.innerWidth >= 768 ? 500 : 400
+  );
+
   // Default to using the main image repeated if no images array exists (fallback)
   const images =
     room.images && room.images.length > 0
       ? room.images
-      : [room.image, room.image, room.image];
+      : [room.image, room.image, room.image, room.image];
 
   const openGallery = (index: number) => {
     setCurrentImageIndex(index);
@@ -71,6 +76,13 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isGalleryOpen, images.length]);
 
+  useEffect(() => {
+    const handleResize = () =>
+      setImageHeight(window.innerWidth >= 768 ? 500 : 400);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="fade-in pb-24 pt-8 max-w-7xl mx-auto px-6 relative">
       <button
@@ -84,8 +96,9 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
         {/* Left Column: Images */}
         <div className="space-y-4">
           <div
-            className="rounded-3xl overflow-hidden shadow-2xl h-[400px] md:h-[500px] border-4 border-stone-100 cursor-pointer group relative"
+            className="rounded-3xl overflow-hidden shadow-2xl flex-none min-h-0 border-4 border-stone-100 cursor-pointer group relative"
             onClick={() => openGallery(0)}
+            style={{ height: imageHeight }}
           >
             <ImageWithFallback
               src={images[0]}
@@ -99,27 +112,43 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
               />
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            {images.slice(0, 3).map((img, idx) => (
-              <div
-                key={idx}
-                className={`rounded-xl overflow-hidden shadow-md h-24 border border-stone-200 cursor-pointer hover:opacity-80 transition-opacity relative ${
-                  idx === 0 ? "ring-2 ring-emerald-400" : ""
-                }`}
-                onClick={() => openGallery(idx)}
-              >
-                <ImageWithFallback
-                  src={img}
-                  alt={`Vista ${idx + 1}`}
-                  className="w-full h-full object-cover"
-                />
-                {idx === 2 && images.length > 3 && (
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white font-bold font-lato">
-                    +{images.length - 3}
-                  </div>
-                )}
-              </div>
-            ))}
+          <div className="grid grid-cols-4 gap-4">
+            {images.slice(0, 4).map((img, idx) => {
+              const isLastSlot = idx === 3;
+              const remainingCount = images.length - 4;
+
+              return (
+                <div
+                  key={idx}
+                  className={`rounded-xl overflow-hidden shadow-md h-32 border border-stone-200 cursor-pointer transition-all relative group 
+          ${idx === 0 ? "ring-2 ring-emerald-400" : "hover:opacity-90"}`}
+                  onClick={() => openGallery(idx)}
+                >
+                  <ImageWithFallback
+                    src={img}
+                    alt={`Vista ${idx + 1}`}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+
+                  {/* Overlay de "Ver más" mejorado */}
+                  {isLastSlot && remainingCount > 0 && (
+                    <div className="absolute inset-0 bg-stone-900/70 backdrop-blur-[1px] flex flex-col items-center justify-center text-white border-2 border-emerald-400/50 rounded-xl">
+                      <span className="text-2xl font-bold">
+                        +{remainingCount}
+                      </span>
+                      <span className="text-[10px] uppercase tracking-tighter font-bold">
+                        Ver Aposentos
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Efecto de brillo al pasar el mouse (excepto si es el último con contador) */}
+                  {(!isLastSlot || remainingCount <= 0) && (
+                    <div className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors" />
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
 
