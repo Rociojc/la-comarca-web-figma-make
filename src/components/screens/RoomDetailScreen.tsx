@@ -245,7 +245,7 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
 
       {/* Full Screen Gallery Modal */}
       {isGalleryOpen && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 md:p-10 fade-in">
+        <div className="fixed inset-0 z-50 bg-emerald-400 flex items-center justify-center p-4 md:p-10 fade-in">
           <button
             onClick={closeGallery}
             className="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors p-2 z-50 bg-black/50 rounded-full"
