@@ -24,7 +24,6 @@ import { RoomDetailScreen } from "./components/screens/RoomDetailScreen";
 import { HomeScreen } from "./components/screens/HomeScreen";
 import { AboutScreen } from "./components/screens/AboutScreen";
 import { RoomsScreen } from "./components/screens/RoomsScreen";
-import { BookingScreen } from "./components/screens/BookingScreen";
 
 const AppContent = () => {
   const navigate = useNavigate();
@@ -93,7 +92,6 @@ const AppContent = () => {
             <Route path="/rooms" element={<RoomsScreen onNavigate={handleNavigate} />} />
             <Route path="/rooms/:id" element={<RoomDetailWrapper />} />
             <Route path="/about" element={<AboutScreen />} />
-            <Route path="/booking" element={<BookingScreen />} />
           </Routes>
         )}
       </div>

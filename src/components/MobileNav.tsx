@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Home, Bed, Feather, Coffee, Users } from "lucide-react";
+import { Home, Bed, Coffee, Users } from "lucide-react";
 
 interface MobileNavProps {
   onNavigate: (path: string) => void;
@@ -28,14 +28,6 @@ export const MobileNav: React.FC<MobileNavProps> = ({ onNavigate }) => {
       >
         <Bed size={22} />
       </button>
-      <div className="relative -top-8">
-        <button
-          onClick={() => onNavigate("/booking")}
-          className="bg-gradient-to-br from-amber-400 to-amber-600 text-white p-4 rounded-full shadow-lg border-4 border-stone-50 cursor-pointer"
-        >
-          <Feather size={24} />
-        </button>
-      </div>
       <button
         onClick={() => onNavigate("/about")}
         className={`flex flex-col items-center gap-1 cursor-pointer ${

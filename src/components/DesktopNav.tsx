@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { Home, Bed, Feather, Sparkles } from "lucide-react";
+import { Home, Bed, Sparkles } from "lucide-react";
 import { ImageWithFallback } from "./ui/ImageWithFallback";
 import logoImage from "figma:asset/8c89f8f661643ffcda66399cfbb883b1767bc5c1.png";
 
@@ -16,7 +16,6 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({ onNavigate }) => {
     { id: "home", path: "/", label: "Inicio", icon: Home },
     { id: "rooms", path: "/rooms", label: "Aposentos", icon: Bed },
     { id: "about", path: "/about", label: "Entorno Mágico", icon: Sparkles },
-    { id: "booking", path: "/booking", label: "Reservas", icon: Feather },
   ];
 
   return (

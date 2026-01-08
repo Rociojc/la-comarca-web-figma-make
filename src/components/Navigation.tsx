@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Calendar, Utensils, User } from 'lucide-react';
+import { Home, Utensils, User } from 'lucide-react';
 import { cn } from './ui/utils';
 
 interface NavigationProps {
@@ -10,7 +10,6 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }) => {
   const navItems = [
     { id: 'home', icon: Home, label: 'Inicio' },
-    { id: 'booking', icon: Calendar, label: 'Reservas' },
     { id: 'services', icon: Utensils, label: 'Servicios' },
     { id: 'profile', icon: User, label: 'Perfil' },
   ];
