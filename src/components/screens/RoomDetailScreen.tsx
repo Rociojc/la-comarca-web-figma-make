@@ -6,7 +6,6 @@ import {
   Check,
   Wifi,
   Coffee,
-  MapPin,
   Shield,
   X,
   ChevronLeft,
@@ -86,7 +85,7 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
     <div className="fade-in pb-24 pt-8 max-w-7xl mx-auto px-6 relative">
       <button
         onClick={onBack}
-        className="flex items-center gap-2 text-stone-600 hover:text-emerald-400 mb-6 font-medieval text-lg transition-colors"
+        className="flex items-center gap-2 text-stone-600 hover:text-emerald-400 mb-6 font-medieval text-lg transition-colors cursor-pointer"
       >
         <ArrowLeft size={20} /> Volver a Aposentos
       </button>
@@ -158,44 +157,32 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
                 {room.title}
               </h1>
             </div>
-            <p className="text-stone-500 font-lato text-xl flex items-center gap-2">
-              <MapPin size={18} /> La Comarca, Tierra Media
-            </p>
           </div>
 
-          <div className="flex flex-wrap gap-4 border-y border-stone-200 py-6">
+          <div className="flex flex-wrap gap-4 border-y border-stone-200 py-6 mb-4">
             <div className="flex items-center gap-2 text-stone-700">
-              <div className="bg-stone-100 p-2 rounded-full">
+              <div className="bg-stone-100 rounded-full">
                 <Users size={20} />
               </div>
               <span className="font-bold">{room.maxGuests || 2} Huéspedes</span>
             </div>
             <div className="flex items-center gap-2 text-stone-700">
-              <div className="bg-stone-100 p-2 rounded-full">
+              <div className="bg-stone-100 rounded-full">
                 <Maximize size={20} />
               </div>
               <span className="font-bold">{room.size || "45 m²"}</span>
             </div>
-            <div className="flex items-center gap-2 text-stone-700">
-              <div className="bg-stone-100 p-2 rounded-full">
-                <Shield size={20} />
-              </div>
-              <span className="font-bold">Seguro contra Dragones</span>
-            </div>
           </div>
 
           <div>
-            <h3 className="font-medieval text-2xl text-stone-800 mb-4">
-              Sobre este aposento
-            </h3>
             <p className="text-stone-600 leading-relaxed font-lato text-lg">
               {room.description || "Un lugar maravilloso para descansar."}
             </p>
           </div>
 
           <div>
-            <h3 className="font-medieval text-2xl text-stone-800 mb-4">
-              Comodidades
+            <h3 className="font-medieval text-2xl text-stone-800 mt-4 mb-4">
+              Dones del Aposento:
             </h3>
             <div className="grid grid-cols-2 gap-3">
               {(room.features || ["Cama cómoda", "Desayuno"]).map(
@@ -205,7 +192,12 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
                     className="flex items-center gap-2 text-stone-600"
                   >
                     <Check size={18} className="text-emerald-500" />
-                    <span>{feature}</span>
+                    <div>
+                      <p className="text-lg">{feature.label}</p>
+                      <p className="uppercase text-xs text-stone-400">
+                        {feature.sub}
+                      </p>
+                    </div>
                   </div>
                 )
               )}
@@ -220,16 +212,21 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
             </div>
           </div>
 
-          <div className="bg-stone-900 rounded-2xl p-6 text-white flex flex-col md:flex-row items-center justify-between shadow-xl gap-4">
+          <div className="bg-stone-900 rounded-2xl p-6 text-white flex flex-col md:flex-row items-center justify-between shadow-xl gap-4 mt-4">
             <div>
-              <p className="text-stone-400 text-sm">Precio por noche</p>
-              <p className="font-medieval text-3xl text-amber-400">
-                {room.price}
+              <p className="text-stone-400 text-sm uppercase mb-1">
+                Valor de la estancia
+              </p>
+              <p className="text-3xl text-amber-400">
+                {room.price}{" "}
+                <span className="text-stone-400 text-sm font-normal italic">
+                  / por noche
+                </span>
               </p>
             </div>
             <button
               onClick={onBook}
-              className="w-full md:w-auto bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-3 rounded-xl font-medieval text-xl transition-all shadow-lg hover:shadow-emerald-500/30 transform hover:-translate-y-1"
+              className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20 cursor-pointer"
             >
               Reservar Aposento
             </button>

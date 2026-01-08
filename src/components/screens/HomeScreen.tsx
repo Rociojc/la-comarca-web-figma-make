@@ -1,14 +1,11 @@
-import React from 'react';
-import {
-  Bed,
-  Utensils,
-  MapPin,
-  ChevronRight,
-} from "lucide-react";
+import React from "react";
+import { Bed, Utensils, MapPin, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "../ui/ImageWithFallback";
 import heroImageDesktop from "../../assets/hero-image-desktop.png";
 
-export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({ onNavigate }) => {
+export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
+  onNavigate,
+}) => {
   return (
     <div className="fade-in pb-24">
       {/* Hero Section Desktop Enhanced */}
@@ -33,14 +30,16 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({ o
             </p>
             <div className="mt-8 flex flex-col md:flex-row gap-4 justify-center">
               <button
-                onClick={() => window.open("https://wa.me/573024391651", "_blank")}
-                className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20"
+                onClick={() =>
+                  window.open("https://wa.me/573024391651", "_blank")
+                }
+                className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20 cursor-pointer"
               >
                 Reservar Ahora
               </button>
               <button
                 onClick={() => onNavigate("/rooms")}
-                className="bg-transparent border-2 border-stone-300 text-stone-100 hover:bg-stone-800 hover:border-stone-800 font-medieval px-8 py-3 rounded-full text-xl transition-all"
+                className="bg-transparent border-2 border-stone-300 text-stone-100 hover:bg-stone-800 hover:border-stone-800 font-medieval px-8 py-3 rounded-full text-xl transition-all cursor-pointer"
               >
                 Explorar Habitaciones
               </button>
@@ -60,8 +59,7 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({ o
               Descanso Épico
             </h3>
             <p className="font-lato text-stone-600">
-              Habitaciones temáticas desde agujeros hobbit hasta suites
-              reales.
+              Habitaciones temáticas desde agujeros hobbit hasta suites reales.
             </p>
           </div>
           <div className="bg-stone-50 p-8 rounded-2xl shadow-xl border border-stone-200 hover:translate-y-2 transition-transform duration-300 flex flex-col items-center text-center">
@@ -72,8 +70,8 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({ o
               Gastronomía
             </h3>
             <p className="font-lato text-stone-600">
-              Disfruta de hasta 7 comidas al día, preparadas con
-              ingredientes locales.
+              Disfruta de hasta 7 comidas al día, preparadas con ingredientes
+              locales.
             </p>
           </div>
           <div className="bg-stone-50 p-8 rounded-2xl shadow-xl border border-stone-200 hover:translate-y-2 transition-transform duration-300 flex flex-col items-center text-center">
@@ -84,8 +82,8 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({ o
               Aventuras
             </h3>
             <p className="font-lato text-stone-600">
-              Tours guiados a las Montañas Nubladas y caminatas por el
-              Bosque Viejo.
+              Tours guiados a las Montañas Nubladas y caminatas por el Bosque
+              Viejo.
             </p>
           </div>
         </div>

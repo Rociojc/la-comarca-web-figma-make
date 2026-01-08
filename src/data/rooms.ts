@@ -4,7 +4,6 @@ export interface Room {
   id: string;
   title: string;
   price: string;
-  rating: string | number;
   image: string;
   tags: string[];
   description?: string;
@@ -15,19 +14,18 @@ export interface Room {
 
 export const rooms: Room[] = [
   {
-    id: "hobbit-standard",
-    title: "Agujero Hobbit Estándar",
-    price: "15 Monedas de Plata",
-    rating: "4.8",
+    id: "hob-frodo",
+    title: "Aposento Frodo",
+    price: "$200.000 COP",
     image: hobbitImage,
-    tags: ["Acogedor", "Puerta Redonda", "Desayuno Incluido"],
+    tags: ["Calor de Hogar", "Baño Ecológico", "Esencia Mágica"],
     description:
-      "Un auténtico agujero hobbit con todas las comodidades. Techos bajos, chimenea acogedora y una despensa siempre llena. Perfecto para descansar después de una aventura o simplemente para disfrutar de una vida tranquila.",
+      "Diseñado para los exploradores de corazón curioso, el Aposento Frodo es una morada tejida bajo la tierra; un refugio cálido donde el tiempo se desvanece y el ruido del mundo moderno no encuentra entrada. Este santuario cuenta con un lecho doble para el reposo profundo, un rincón de lectura y un recinto privado que honra la vida. En un acto de alquimia natural, las aguas son templadas por el fuego a través de ancestrales tubos de cobre, asegurando una armonía total con los elementos.",
     features: [
-      "Chimenea de leña",
-      "Despensa surtida",
-      "Jardín privado",
-      "Biblioteca de mapas",
+      { label: "Recinto de Purificación Privado", sub: "Baño Privado" },
+      { label: "Gran Lecho para el Reposo", sub: "Cama Doble" },
+      { label: "Rincón del Relato", sub: "Sofá acogedor" },
+      { label: "Banquete del Alba Incluido", sub: "Desayuno Incluido" },
     ],
     maxGuests: 2,
     size: "45 m²",
@@ -36,7 +34,6 @@ export const rooms: Room[] = [
     id: "gondor-suite",
     title: "Suite Real de Gondor",
     price: "50 Monedas de Plata",
-    rating: "4.9",
     image:
       "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?q=80&w=800&auto=format&fit=crop",
     tags: ["Vista a la Montaña", "Cama King", "Baño de Mármol"],
@@ -55,7 +52,6 @@ export const rooms: Room[] = [
     id: "lorien-cabin",
     title: "Cabaña de Lorien",
     price: "35 Monedas de Plata",
-    rating: "5.0",
     image:
       "https://images.unsplash.com/photo-1449156493391-d2cfa28e468b?q=80&w=800&auto=format&fit=crop",
     tags: ["En los árboles", "Mágico", "Luz Estelar"],
@@ -74,7 +70,6 @@ export const rooms: Room[] = [
     id: "rivendell-retreat",
     title: "Refugio de Rivendel",
     price: "45 Monedas de Plata",
-    rating: "4.9",
     image:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=800&auto=format&fit=crop",
     tags: ["Cascadas", "Lectura", "Paz"],
@@ -93,7 +88,6 @@ export const rooms: Room[] = [
     id: "prancing-pony",
     title: "Posada del Poney Pisador",
     price: "10 Monedas de Plata",
-    rating: "4.5",
     image:
       "https://images.unsplash.com/photo-1572935633135-caed67d46413?q=80&w=800&auto=format&fit=crop",
     tags: ["Rústico", "Cerveza Gratis", "Animado"],
@@ -112,7 +106,6 @@ export const rooms: Room[] = [
     id: "isengard-tower",
     title: "Torre de Isengard (Eco)",
     price: "25 Monedas de Plata",
-    rating: "4.2",
     image:
       "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=800&auto=format&fit=crop",
     tags: ["Vista 360", "Industrial", "Minimalista"],
