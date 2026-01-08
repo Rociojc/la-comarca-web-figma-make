@@ -53,7 +53,12 @@ const AppContent = () => {
       <RoomDetailScreen
         room={selectedRoom}
         onBack={() => handleNavigate('/rooms')}
-        onBook={() => window.open(`https://wa.me/573024391651?text=Estoy%20interesado%20en%20reservala%20la%20habitacion%20${encodeURIComponent(selectedRoom.title)}`, "_blank")}
+        onBook={() => {
+          const phone = import.meta.env.VITE_WHATSAPP_PHONE;
+          const baseMsg = import.meta.env.VITE_WHATSAPP_ROOM_MESSAGE;
+          const message = encodeURIComponent(`${baseMsg} ${selectedRoom.title}`);
+          window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+        }}
       />
     );
   };
@@ -132,7 +137,7 @@ const AppContent = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <a 
-                  href="https://wa.me/573024391651" 
+                  href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_PHONE}`} 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="hover:text-amber-400 transition-colors"
