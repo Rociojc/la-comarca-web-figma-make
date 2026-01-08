@@ -54,7 +54,7 @@ const AppContent = () => {
       <RoomDetailScreen
         room={selectedRoom}
         onBack={() => handleNavigate('/rooms')}
-        onBook={() => handleNavigate('/booking')}
+        onBook={() => window.open("https://wa.me/573024391651", "_blank")}
       />
     );
   };
@@ -132,7 +132,16 @@ const AppContent = () => {
           <div>
             <h4 className="font-bold text-stone-200 mb-4">Contacto</h4>
             <ul className="space-y-2 text-sm">
-              <li>+57 xxx xx xx</li>
+              <li>
+                <a 
+                  href="https://wa.me/573024391651" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-amber-400 transition-colors"
+                >
+                  +57 302 4391651
+                </a>
+              </li>
             </ul>
           </div>
           <div>

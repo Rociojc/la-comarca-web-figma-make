@@ -33,7 +33,7 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({ o
             </p>
             <div className="mt-8 flex flex-col md:flex-row gap-4 justify-center">
               <button
-                onClick={() => onNavigate("/booking")}
+                onClick={() => window.open("https://wa.me/573024391651", "_blank")}
                 className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20"
               >
                 Reservar Ahora
