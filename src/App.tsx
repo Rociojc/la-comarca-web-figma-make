@@ -53,7 +53,7 @@ const AppContent = () => {
       <RoomDetailScreen
         room={selectedRoom}
         onBack={() => handleNavigate('/rooms')}
-        onBook={() => window.open("https://wa.me/573024391651", "_blank")}
+        onBook={() => window.open(`https://wa.me/573024391651?text=Estoy%20interesado%20en%20reservala%20la%20habitacion%20${encodeURIComponent(selectedRoom.title)}`, "_blank")}
       />
     );
   };

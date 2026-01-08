@@ -31,7 +31,7 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
             <div className="mt-8 flex flex-col md:flex-row gap-4 justify-center">
               <button
                 onClick={() =>
-                  window.open("https://wa.me/573024391651", "_blank")
+                  window.open("https://wa.me/573024391651?text=Estoy%20interesado%20en%20reservar%20una%20habitacion", "_blank")
                 }
                 className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20 cursor-pointer"
               >
