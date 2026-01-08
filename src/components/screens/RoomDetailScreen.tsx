@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   ArrowLeft,
-  Star,
   Users,
   Maximize,
   Check,
@@ -96,7 +95,7 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
         {/* Left Column: Images */}
         <div className="space-y-4">
           <div
-            className="rounded-3xl overflow-hidden shadow-2xl flex-none min-h-0 border-4 border-stone-100 cursor-pointer group relative"
+            className="rounded-3xl overflow-hidden shadow-2xl flex-none min-h-0 border-4 border-stone-100 cursor-pointer group relative mb-4"
             onClick={() => openGallery(0)}
             style={{ height: imageHeight }}
           >
@@ -130,7 +129,6 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
 
-                  {/* Overlay de "Ver más" mejorado */}
                   {isLastSlot && remainingCount > 0 && (
                     <div className="absolute inset-0 bg-stone-900/70 backdrop-blur-[1px] flex flex-col items-center justify-center text-white border-2 border-emerald-400/50 rounded-xl">
                       <span className="text-2xl font-bold">
@@ -159,10 +157,6 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
               <h1 className="font-medieval text-4xl md:text-5xl text-stone-900 mb-2">
                 {room.title}
               </h1>
-              <div className="flex items-center gap-1 bg-amber-100 px-3 py-1 rounded-full text-amber-600 font-bold border border-amber-200">
-                <Star size={16} className="fill-current" />
-                {room.rating}
-              </div>
             </div>
             <p className="text-stone-500 font-lato text-xl flex items-center gap-2">
               <MapPin size={18} /> La Comarca, Tierra Media
@@ -248,7 +242,8 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
         <div className="fixed inset-0 z-50 bg-emerald-400 flex items-center justify-center p-4 md:p-10 fade-in">
           <button
             onClick={closeGallery}
-            className="absolute top-4 right-4 text-stone-400 hover:text-white transition-colors p-2 z-50 bg-black/50 rounded-full"
+            className="absolute text-stone-400 hover:text-white transition-colors p-2 z-50 rounded-full"
+            style={{ top: "10px", right: "10px" }}
           >
             <X size={32} />
           </button>
@@ -265,6 +260,7 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
               src={images[currentImageIndex]}
               alt={`Gallery Image ${currentImageIndex + 1}`}
               className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
+              style={{ height: "90vh" }}
             />
             <div className="absolute bottom-4 left-0 right-0 text-center text-white/80 font-lato text-sm">
               Imagen {currentImageIndex + 1} de {images.length}

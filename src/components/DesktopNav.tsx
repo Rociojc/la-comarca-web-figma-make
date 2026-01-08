@@ -37,7 +37,7 @@ export const DesktopNav: React.FC<DesktopNavProps> = ({
           <button
             key={item.id}
             onClick={() => setActiveTab(item.id)}
-            className={`flex items-center gap-2 font-medieval text-lg transition-colors duration-200 ${
+            className={`flex items-center gap-2 font-medieval text-lg transition-colors duration-200 cursor-pointer ${
               activeTab === item.id
                 ? "text-amber-400"
                 : "text-stone-300 hover:text-white"

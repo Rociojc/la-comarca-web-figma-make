@@ -26,7 +26,7 @@ export const Navigation: React.FC<NavigationProps> = ({ activeTab, onTabChange }
               key={item.id}
               onClick={() => onTabChange(item.id)}
               className={cn(
-                "flex flex-col items-center gap-1 transition-colors duration-300",
+                "flex flex-col items-center gap-1 transition-colors duration-300 cursor-pointer",
                 isActive ? "text-[#558B2F]" : "text-stone-400 hover:text-stone-600"
               )}
             >
