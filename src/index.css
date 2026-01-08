@@ -2307,10 +2307,7 @@ html {
     transform: translateY(0);
   }
 }
-import React from 'react';
 
-export const GlobalStyles = () => (
-  
     @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=MedievalSharp&display=swap');
     
     .font-medieval { font-family: 'MedievalSharp', cursive; }
@@ -2346,6 +2343,5 @@ export const GlobalStyles = () => (
         -ms-overflow-style: none;
         scrollbar-width: none;
     }
-  
-);
+
 
