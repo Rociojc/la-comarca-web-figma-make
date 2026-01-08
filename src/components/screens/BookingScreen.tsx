@@ -1,75 +1,107 @@
 import React from 'react';
-import { Calendar as CalendarIcon, Users, Check } from 'lucide-react';
-import { Calendar } from '../ui/calendar';
-import { Button } from '../ui/button';
-import { Card, CardContent } from '../ui/card';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
+import {
+  MapPin,
+  Star,
+  Users,
+} from "lucide-react";
 
 export const BookingScreen: React.FC = () => {
-  const [date, setDate] = React.useState<Date | undefined>(new Date());
-
-  return (
-    <div className="pb-24 animate-in fade-in duration-500">
-      <header className="pt-12 pb-6 px-6 bg-[#FDFBF7] sticky top-0 z-30 shadow-sm">
-        <h1 className="text-2xl font-['MedievalSharp'] text-[#3E2723] text-center">Tu Reserva</h1>
-      </header>
-
-      <div className="px-6 mt-6">
-        <div className="bg-white rounded-2xl p-4 shadow-sm mb-6">
-          <div className="flex gap-4 items-center mb-4 pb-4 border-b border-stone-100">
-            <div className="w-16 h-16 rounded-lg overflow-hidden shrink-0">
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1749665833257-5a7938ffe00e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3p5JTIwbWVkaWV2YWwlMjBiZWRyb29tJTIwc3RvbmUlMjB3YWxscyUyMGNhbmRsZSUyMGxpZ2h0fGVufDF8fHx8MTc2NDM2MzEyMHww&ixlib=rb-4.1.0&q=80&w=1080"
-                alt="Room"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div>
-              <h3 className="font-['MedievalSharp'] text-[#3E2723]">Suite Bolsón Cerrado</h3>
-              <p className="text-stone-500 text-sm font-sans">150$ / noche</p>
-            </div>
-          </div>
-          
-          <div className="flex justify-between items-center font-sans text-sm">
-            <span className="text-stone-600">Total (3 noches)</span>
-            <span className="font-bold text-[#3E2723] text-lg">450$</span>
-          </div>
-        </div>
-
-        <h2 className="text-lg font-['MedievalSharp'] text-[#3E2723] mb-4">Selecciona Fechas</h2>
-        <div className="bg-white rounded-2xl p-4 shadow-sm mb-6 flex justify-center">
-          <Calendar
-            mode="single"
-            selected={date}
-            onSelect={setDate}
-            className="rounded-md border-none"
-          />
-        </div>
-
-        <h2 className="text-lg font-['MedievalSharp'] text-[#3E2723] mb-4">Huéspedes</h2>
-        <div className="bg-white rounded-2xl p-4 shadow-sm mb-8">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <div className="bg-stone-100 p-2 rounded-full">
-                <Users className="w-5 h-5 text-[#3E2723]" />
+    return (
+        <div className="fade-in pb-24 px-6 md:pt-12">
+            <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <h2 className="font-medieval text-4xl md:text-6xl text-stone-800 leading-tight">
+                  Tu Aventura Comienza Aquí
+                </h2>
+                <p className="font-lato text-stone-600 text-lg">
+                  Ya sea que vengas de una larga caminata desde Mordor o
+                  simplemente estés visitando a parientes en Hobbiton, tenemos
+                  el lugar perfecto para ti.
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+                    <div className="bg-emerald-400/20 p-2 rounded-full text-emerald-400">
+                      <MapPin />
+                    </div>
+                    <span className="font-medieval text-stone-700">
+                      Ubicación Privilegiada
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white p-4 rounded-xl shadow-sm">
+                    <div className="bg-amber-400/20 p-2 rounded-full text-amber-400">
+                      <Star />
+                    </div>
+                    <span className="font-medieval text-stone-700">
+                      Servicio 5 Estrellas
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="font-bold text-[#3E2723]">Adultos</p>
-                <p className="text-xs text-stone-500">Mayores de 13 años</p>
+
+              <div className="bg-white p-8 rounded-3xl shadow-xl border border-stone-200">
+                <h3 className="font-medieval text-2xl text-stone-800 mb-6 text-center">
+                  Consultar Disponibilidad
+                </h3>
+                <form className="space-y-5">
+                  <div>
+                    <label className="block text-sm font-lato font-bold text-stone-600 mb-1">
+                      Nombre del Viajero
+                    </label>
+                    <div className="relative">
+                      <Users
+                        className="absolute left-3 top-3 text-stone-400"
+                        size={18}
+                      />
+                      <input
+                        type="text"
+                        placeholder="Frodo Bolsón"
+                        className="w-full bg-stone-50 border border-stone-200 rounded-lg p-3 pl-10 font-lato focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 transition-colors"
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-lato font-bold text-stone-600 mb-1">
+                        Llegada
+                      </label>
+                      <input
+                        type="date"
+                        className="w-full bg-stone-50 border border-stone-200 rounded-lg p-3 font-lato text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-lato font-bold text-stone-600 mb-1">
+                        Partida
+                      </label>
+                      <input
+                        type="date"
+                        className="w-full bg-stone-50 border border-stone-200 rounded-lg p-3 font-lato text-sm"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-lato font-bold text-stone-600 mb-1">
+                      Raza / Tipo de Huésped
+                    </label>
+                    <select className="w-full bg-stone-50 border border-stone-200 rounded-lg p-3 font-lato">
+                      <option>Hobbit (Techos bajos)</option>
+                      <option>Humano / Mago (Techos altos)</option>
+                      <option>Elfo (Vista al bosque)</option>
+                      <option>Enano (Subterráneo)</option>
+                    </select>
+                  </div>
+                  <button
+                    type="button"
+                    className="w-full bg-emerald-400 text-stone-50 font-medieval text-xl py-4 rounded-xl mt-4 hover:bg-emerald-500 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-1 duration-200"
+                  >
+                    Confirmar Reserva
+                  </button>
+                  <p className="text-center text-xs text-stone-400 font-lato">
+                    No aceptamos oro de dragón maldito.
+                  </p>
+                </form>
               </div>
             </div>
-            <div className="flex items-center gap-3">
-              <button className="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500">-</button>
-              <span className="font-bold text-[#3E2723]">2</span>
-              <button className="w-8 h-8 rounded-full bg-[#3E2723] text-white flex items-center justify-center">+</button>
-            </div>
-          </div>
         </div>
-
-        <Button className="w-full bg-[#558B2F] hover:bg-[#33691E] text-white font-['MedievalSharp'] h-14 text-lg rounded-xl shadow-lg shadow-green-900/20">
-          Confirmar Reserva
-        </Button>
-      </div>
-    </div>
-  );
-};
+    )
+}

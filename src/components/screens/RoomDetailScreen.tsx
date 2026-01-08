@@ -13,7 +13,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Room } from "../../data/rooms";
-import { ImageWithFallback } from "../figma/ImageWithFallback";
+import { ImageWithFallback } from "../ui/ImageWithFallback";
 
 interface RoomDetailScreenProps {
   room: Room;

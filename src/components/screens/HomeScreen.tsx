@@ -1,98 +1,147 @@
 import React from 'react';
-import { MapPin, Search, Bell } from 'lucide-react';
-import { Input } from '../ui/input';
-import { RoomCard } from '../RoomCard';
-import { ImageWithFallback } from '../figma/ImageWithFallback';
+import {
+  Bed,
+  Utensils,
+  MapPin,
+  ChevronRight,
+} from "lucide-react";
+import { ImageWithFallback } from "../ui/ImageWithFallback";
+import heroImageDesktop from "../../assets/hero-image-desktop.png";
 
-export const HomeScreen: React.FC<{ onBookRoom: () => void }> = ({ onBookRoom }) => {
+export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({ onNavigate }) => {
   return (
-    <div className="pb-24 animate-in fade-in duration-500">
-      {/* Header */}
-      <header className="pt-12 pb-6 px-6 flex justify-between items-center bg-[#FDFBF7] sticky top-0 z-30 shadow-sm">
-        <div>
-          <p className="text-stone-500 text-sm font-sans mb-1">Bienvenido a</p>
-          <h1 className="text-2xl font-['MedievalSharp'] text-[#3E2723]">La Comarca</h1>
-        </div>
-        <div className="p-2 bg-white rounded-full shadow-sm border border-stone-100 relative">
-          <Bell className="w-5 h-5 text-stone-600" />
-          <span className="absolute top-2 right-2 w-2 h-2 bg-[#D4AF37] rounded-full border border-white"></span>
-        </div>
-      </header>
-
-      {/* Search Section */}
-      <div className="px-6 mb-8">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 w-5 h-5" />
-          <Input 
-            placeholder="Busca tu estancia perfecta..." 
-            className="pl-10 bg-white border-stone-200 h-12 rounded-xl font-sans text-stone-600 focus-visible:ring-[#558B2F]"
-          />
-        </div>
-      </div>
-
-      {/* Categories */}
-      <div className="px-6 mb-8">
-        <h2 className="text-lg font-['MedievalSharp'] text-[#3E2723] mb-4">Categorías</h2>
-        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-          {['Todos', 'Hobbit Holes', 'Elfos', 'Rohan', 'Gondor'].map((cat, i) => (
-            <button 
-              key={cat}
-              className={`
-                px-5 py-2.5 rounded-full whitespace-nowrap font-sans text-sm transition-all
-                ${i === 0 
-                  ? 'bg-[#3E2723] text-[#FDFBF7] shadow-md' 
-                  : 'bg-white text-stone-600 border border-stone-200 hover:border-[#3E2723]'}
-              `}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Featured Hero */}
-      <div className="px-6 mb-8">
-        <div className="relative rounded-2xl overflow-hidden h-64 shadow-lg group cursor-pointer">
-          <ImageWithFallback
-            src="https://images.unsplash.com/photo-1656325426374-12edc72af77e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob2JiaXQlMjBob3VzZSUyMGV4dGVyaW9yJTIwZ3JlZW4lMjBuYXR1cmV8ZW58MXx8fHwxNzY0MzYzMTIwfDA&ixlib=rb-4.1.0&q=80&w=1080"
-            alt="Hobbit House"
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-[#2C1810]/90 to-transparent p-6 pt-20">
-            <h3 className="text-white font-['MedievalSharp'] text-xl mb-1">Experiencia La Colina</h3>
-            <p className="text-stone-200 text-sm font-sans line-clamp-1">Vive como un verdadero Hobbit en nuestras suites bajo tierra.</p>
+    <div className="fade-in pb-24">
+      {/* Hero Section Desktop Enhanced */}
+      <div className="relative h-[50vh] md:h-[80vh] w-full bg-stone-900 md:rounded-b-[4rem] rounded-b-[2rem] overflow-hidden mb-12 shadow-2xl">
+        <ImageWithFallback
+          src={heroImageDesktop}
+          alt="hero-image-desktop"
+          className="w-full h-full object-cover opacity-50 scale-105 hover:scale-100 transition-transform duration-[20s]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent opacity-90"></div>
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+          <div className="animate-fade-in-up">
+            <p className="text-stone-200 font-medieval text-xl md:text-3xl mb-4 tracking-widest uppercase drop-shadow-md">
+              Bienvenidos a
+            </p>
+            <h1 className="text-6xl md:text-9xl font-medieval text-stone-50 leading-tight mb-6 drop-shadow-2xl">
+              La Comarca
+            </h1>
+            <p className="text-stone-200 font-lato text-lg md:text-2xl max-w-2xl mx-auto font-light leading-relaxed">
+              Donde la comodidad del hogar se encuentra con la magia de la
+              Tierra Media.
+            </p>
+            <div className="mt-8 flex flex-col md:flex-row gap-4 justify-center">
+              <button
+                onClick={() => onNavigate("/booking")}
+                className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20"
+              >
+                Reservar Ahora
+              </button>
+              <button
+                onClick={() => onNavigate("/rooms")}
+                className="bg-transparent border-2 border-stone-300 text-stone-100 hover:bg-stone-800 hover:border-stone-800 font-medieval px-8 py-3 rounded-full text-xl transition-all"
+              >
+                Explorar Habitaciones
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Popular Rooms */}
-      <div className="px-6">
-        <div className="flex justify-between items-end mb-4">
-          <h2 className="text-lg font-['MedievalSharp'] text-[#3E2723]">Estancias Populares</h2>
-          <button className="text-sm text-[#558B2F] font-bold font-sans">Ver todo</button>
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Features Section Desktop Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 -mt-20 relative z-10">
+          <div className="bg-stone-50 p-8 rounded-2xl shadow-xl border border-stone-200 hover:translate-y-2 transition-transform duration-300 flex flex-col items-center text-center">
+            <div className="bg-emerald-400/20 p-4 rounded-full text-emerald-400 mb-4">
+              <Bed size={32} />
+            </div>
+            <h3 className="font-medieval text-2xl text-stone-800 mb-2">
+              Descanso Épico
+            </h3>
+            <p className="font-lato text-stone-600">
+              Habitaciones temáticas desde agujeros hobbit hasta suites
+              reales.
+            </p>
+          </div>
+          <div className="bg-stone-50 p-8 rounded-2xl shadow-xl border border-stone-200 hover:translate-y-2 transition-transform duration-300 flex flex-col items-center text-center">
+            <div className="bg-amber-400/20 p-4 rounded-full text-amber-400 mb-4">
+              <Utensils size={32} />
+            </div>
+            <h3 className="font-medieval text-2xl text-stone-800 mb-2">
+              Gastronomía
+            </h3>
+            <p className="font-lato text-stone-600">
+              Disfruta de hasta 7 comidas al día, preparadas con
+              ingredientes locales.
+            </p>
+          </div>
+          <div className="bg-stone-50 p-8 rounded-2xl shadow-xl border border-stone-200 hover:translate-y-2 transition-transform duration-300 flex flex-col items-center text-center">
+            <div className="bg-emerald-400/10 p-4 rounded-full text-emerald-400 mb-4">
+              <MapPin size={32} />
+            </div>
+            <h3 className="font-medieval text-2xl text-stone-800 mb-2">
+              Aventuras
+            </h3>
+            <p className="font-lato text-stone-600">
+              Tours guiados a las Montañas Nubladas y caminatas por el
+              Bosque Viejo.
+            </p>
+          </div>
         </div>
-        
-        <RoomCard
-          title="Suite Bolsón Cerrado"
-          description="Acogedora estancia con chimenea de piedra, muebles de roble y vistas al jardín de la fiesta."
-          price={150}
-          rating={4.9}
-          capacity={2}
-          size={45}
-          imageUrl="https://images.unsplash.com/photo-1749665833257-5a7938ffe00e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjb3p5JTIwbWVkaWV2YWwlMjBiZWRyb29tJTIwc3RvbmUlMjB3YWxscyUyMGNhbmRsZSUyMGxpZ2h0fGVufDF8fHx8MTc2NDM2MzEyMHww&ixlib=rb-4.1.0&q=80&w=1080"
-          onBook={onBookRoom}
-        />
-        
-        <RoomCard
-          title="Cámara de Rivendel"
-          description="Elegancia élfica con arcos tallados, luz natural y sábanas de seda de la mejor calidad."
-          price={280}
-          rating={5.0}
-          capacity={3}
-          size={60}
-          imageUrl="https://images.unsplash.com/photo-1667375185276-13b00bf723bc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBlbGVnYW50JTIwZmFudGFzeSUyMGJlZHJvb20lMjB3b29kJTIwaW50cmljYXRlfGVufDF8fHx8MTc2NDM2MzEyMHww&ixlib=rb-4.1.0&q=80&w=1080"
-          onBook={onBookRoom}
-        />
+
+        {/* Featured Experiences */}
+        <div className="mb-16">
+          <div className="flex justify-between items-end mb-8">
+            <div>
+              <h3 className="font-medieval text-4xl text-stone-800 mb-2">
+                Experiencias Destacadas
+              </h3>
+              <p className="font-lato text-stone-500">
+                Más allá de una simple estancia.
+              </p>
+            </div>
+            <button className="text-emerald-400 hover:text-emerald-500 font-lato font-bold flex items-center gap-1 group">
+              Ver todas las actividades{" "}
+              <ChevronRight className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Tour a Hobbiton",
+                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop",
+              },
+              {
+                title: "Cata de Vinos",
+                img: "https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=400&auto=format&fit=crop",
+              },
+              {
+                title: "Taller de Forja",
+                img: "https://images.unsplash.com/photo-1596627689623-2882196191b6?q=80&w=400&auto=format&fit=crop",
+              },
+              {
+                title: "Noche de Cuentos",
+                img: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=400&auto=format&fit=crop",
+              },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="h-64 rounded-2xl relative overflow-hidden group cursor-pointer shadow-md"
+              >
+                <ImageWithFallback
+                  src={item.img}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent opacity-80"></div>
+                <span className="absolute bottom-4 left-4 font-medieval text-white text-2xl drop-shadow-md group-hover:text-amber-400 transition-colors">
+                  {item.title}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
