@@ -55,8 +55,9 @@ const AppContent = () => {
         onBack={() => handleNavigate('/rooms')}
         onBook={() => {
           const phone = import.meta.env.VITE_WHATSAPP_PHONE;
-          const baseMsg = import.meta.env.VITE_WHATSAPP_ROOM_MESSAGE;
-          const message = encodeURIComponent(`${baseMsg} ${selectedRoom.title}`);
+          const template = import.meta.env.VITE_WHATSAPP_ROOM_MESSAGE;
+          const messageText = template.replace('{room}', selectedRoom.title);
+          const message = encodeURIComponent(messageText);
           window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
         }}
       />
