@@ -1,13 +1,19 @@
-import hobbitImage from "../assets/rooms/frodo/frodo-imagen-2.webp";
+import frodo1 from "../assets/rooms/frodo/frodo-imagen-1.webp";
+import frodo2 from "../assets/rooms/frodo/frodo-imagen-2.webp";
+import frodo3 from "../assets/rooms/frodo/frodo-imagen-3.webp";
+import frodo4 from "../assets/rooms/frodo/frodo-imagen-4.webp";
+import frodo5 from "../assets/rooms/frodo/frodo-imagen-5.webp";
+import frodo6 from "../assets/rooms/frodo/frodo-imagen-6.webp";
 
 export interface Room {
   id: string;
   title: string;
   price: string;
   image: string;
+  images?: string[];
   tags: string[];
   description?: string;
-  features?: string[];
+  features?: any[];
   maxGuests?: number;
   size?: string;
 }
@@ -17,7 +23,8 @@ export const rooms: Room[] = [
     id: "hob-frodo",
     title: "Aposento Frodo",
     price: "$200.000 COP",
-    image: hobbitImage,
+    image: frodo1,
+    images: [frodo1, frodo2, frodo3, frodo4, frodo5, frodo6],
     tags: ["Calor de Hogar", "Baño Ecológico", "Esencia Mágica"],
     description:
       "Diseñado para los exploradores de corazón curioso, el Aposento Frodo es una morada tejida bajo la tierra; un refugio cálido donde el tiempo se desvanece y el ruido del mundo moderno no encuentra entrada. Este santuario cuenta con un lecho doble para el reposo profundo, un rincón de lectura y un recinto privado que honra la vida. En un acto de alquimia natural, las aguas son templadas por el fuego a través de ancestrales tubos de cobre, asegurando una armonía total con los elementos.",

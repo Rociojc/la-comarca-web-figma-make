@@ -103,11 +103,10 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
               alt={room.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-              <Maximize
-                className="text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg"
-                size={48}
-              />
+            <div className="absolute bottom-4 right-4 transition-transform duration-300 group-hover:scale-110">
+              <div className="bg-black/40 backdrop-blur-md p-2 rounded-full border border-white/20 opacity-0 group-hover:opacity-100 transition-opacity">
+                <Maximize className="text-white drop-shadow-lg" size={24} />
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-4 gap-4">
@@ -130,11 +129,11 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
 
                   {isLastSlot && remainingCount > 0 && (
                     <div className="absolute inset-0 bg-stone-900/70 backdrop-blur-[1px] flex flex-col items-center justify-center text-white border-2 border-emerald-400/50 rounded-xl">
-                      <span className="text-2xl font-bold">
+                      <span className="text-xl font-bold">
                         +{remainingCount}
                       </span>
-                      <span className="text-[10px] uppercase tracking-tighter font-bold">
-                        Ver Aposentos
+                      <span className="text-xl tracking-tighter font-bold">
+                        Ver Más
                       </span>
                     </div>
                   )}
@@ -236,7 +235,7 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
 
       {/* Full Screen Gallery Modal */}
       {isGalleryOpen && (
-        <div className="fixed inset-0 z-50 bg-emerald-400 flex items-center justify-center p-4 md:p-10 fade-in">
+        <div className="fixed inset-0 z-50 bg-stone-900 flex items-center justify-center p-4 md:p-10 fade-in">
           <button
             onClick={closeGallery}
             className="absolute text-stone-400 hover:text-white transition-colors p-2 z-50 rounded-full"
@@ -259,7 +258,7 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
               className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
               style={{ height: "90vh" }}
             />
-            <div className="absolute bottom-4 left-0 right-0 text-center text-white/80 font-lato text-sm">
+            <div className="absolute bottom-4 left-0 right-0 text-center text-white font-lato text-sm">
               Imagen {currentImageIndex + 1} de {images.length}
             </div>
           </div>
