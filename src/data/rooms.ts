@@ -1,3 +1,5 @@
+import hobbitImage from "../assets/rooms/frodo/frodo-imagen-2.webp";
+
 export interface Room {
   id: string;
   title: string;
@@ -17,8 +19,7 @@ export const rooms: Room[] = [
     title: "Agujero Hobbit Estándar",
     price: "15 Monedas de Plata",
     rating: "4.8",
-    image:
-      "https://images.unsplash.com/photo-1510798831971-661eb04b3739?q=80&w=800&auto=format&fit=crop",
+    image: hobbitImage,
     tags: ["Acogedor", "Puerta Redonda", "Desayuno Incluido"],
     description:
       "Un auténtico agujero hobbit con todas las comodidades. Techos bajos, chimenea acogedora y una despensa siempre llena. Perfecto para descansar después de una aventura o simplemente para disfrutar de una vida tranquila.",
