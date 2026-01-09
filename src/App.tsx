@@ -7,14 +7,9 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import {
-  Menu,
-  Feather,
-  Instagram,
-  Youtube,
-  MapPin,
-} from "lucide-react";
+import { Menu, Feather, Instagram, Youtube, MapPin } from "lucide-react";
 
+import { useIsMobile } from "./components/ui/use-mobile";
 import { DesktopNav } from "./components/DesktopNav";
 import { MobileNav } from "./components/MobileNav";
 import { ImageWithFallback } from "./components/ui/ImageWithFallback";
@@ -30,6 +25,7 @@ const AppContent = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const MAPS_URL =
     "https://www.google.com/maps/place/5%C2%B044'04.9%22N+72%C2%B051'09.1%22W/@5.7346981,-72.8550908,17z/data=!3m1!4b1!4m4!3m3!8m2!3d5.7346981!4d-72.8525159?hl=es&entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA2N0gBUAM%3D";
@@ -44,7 +40,7 @@ const AppContent = () => {
     navigate(path);
     window.scrollTo(0, 0);
   };
-  
+
   const RoomDetailWrapper = () => {
     const { id } = useParams<{ id: string }>();
     const selectedRoom = rooms.find((r) => r.id === id);
@@ -52,11 +48,11 @@ const AppContent = () => {
     return (
       <RoomDetailScreen
         room={selectedRoom}
-        onBack={() => handleNavigate('/rooms')}
+        onBack={() => handleNavigate("/rooms")}
         onBook={() => {
           const phone = import.meta.env.VITE_WHATSAPP_PHONE;
           const template = import.meta.env.VITE_WHATSAPP_ROOM_MESSAGE;
-          const messageText = template.replace('{room}', selectedRoom.title);
+          const messageText = template.replace("{room}", selectedRoom.title);
           const message = encodeURIComponent(messageText);
           window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
         }}
@@ -66,8 +62,6 @@ const AppContent = () => {
 
   return (
     <div className="min-h-screen w-full font-lato text-stone-800">
-
-
       <DesktopNav onNavigate={handleNavigate} />
 
       <div className="md:hidden sticky top-0 w-full z-40 bg-stone-900 text-white p-4 flex justify-center items-center shadow-md">
@@ -90,8 +84,14 @@ const AppContent = () => {
           </div>
         ) : (
           <Routes>
-            <Route path="/" element={<HomeScreen onNavigate={handleNavigate} />} />
-            <Route path="/rooms" element={<RoomsScreen onNavigate={handleNavigate} />} />
+            <Route
+              path="/"
+              element={<HomeScreen onNavigate={handleNavigate} />}
+            />
+            <Route
+              path="/rooms"
+              element={<RoomsScreen onNavigate={handleNavigate} />}
+            />
             <Route path="/rooms/:id" element={<RoomDetailWrapper />} />
             <Route path="/about" element={<AboutScreen />} />
           </Routes>
@@ -100,9 +100,20 @@ const AppContent = () => {
 
       <MobileNav onNavigate={handleNavigate} />
 
-      <footer className="hidden md:block bg-stone-900 text-stone-400 py-12 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-4 gap-8">
-          <div>
+      <footer className="bg-stone-900 text-stone-400 py-12 px-6 mb-24 md:mb-0">
+        <div
+          className="max-w-7xl mx-auto grid gap-8"
+          style={{
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
+            textAlign: isMobile ? "center" : "left",
+          }}
+        >
+          <div
+            className="flex flex-col md:items-start"
+            style={{
+              alignItems: isMobile ? "center" : "normal",
+            }}
+          >
             <h3 className="font-medieval text-2xl text-stone-50 mb-4">
               La Comarca
             </h3>
@@ -110,7 +121,12 @@ const AppContent = () => {
               "No olvides que el camino siempre estará esperando a tus pies 🍀"
             </p>
           </div>
-          <div>
+          <div
+            className="flex flex-col md:items-start"
+            style={{
+              alignItems: isMobile ? "center" : "normal",
+            }}
+          >
             <h4 className="font-bold text-stone-200 mb-4">Redes Sociales</h4>
             <div className="flex gap-4 mt-6">
               <a
@@ -129,32 +145,49 @@ const AppContent = () => {
               </a>
             </div>
           </div>
-          <div>
+          <div
+            className="flex flex-col md:items-start"
+            style={{
+              alignItems: isMobile ? "center" : "normal",
+            }}
+          >
             <h4 className="font-bold text-stone-200 mb-4">Contacto</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a 
-                  href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_PHONE}`} 
-                  target="_blank" 
+                <a
+                  href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_PHONE}`}
+                  target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-amber-400 transition-colors"
+                  className="hover:text-white transition-colors"
                 >
                   +57 302 4391651
                 </a>
               </li>
             </ul>
           </div>
-          <div>
+          <div
+            className="flex flex-col md:items-start"
+            style={{
+              alignItems: isMobile ? "center" : "normal",
+            }}
+          >
             <h4 className="font-bold text-stone-200 mb-4">Ubicación</h4>
             <p
-              className="text-stone-400 text-sm flex items-center gap-2 cursor-pointer hover:text-amber-500 transition-colors"
+              className="text-stone-400 text-sm flex items-center md:justify-start gap-2 cursor-pointer hover:text-white transition-colors"
               onClick={() => window.open(MAPS_URL, "_blank")}
             >
               <MapPin size={14} /> La Comarca, Monguí - Boyacá, Colombia
             </p>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-stone-800 text-center text-xs">
+        <div
+          className="max-w-7xl mx-auto border-t border-stone-800 text-center text-xs"
+          style={{
+            marginTop: isMobile ? "16px" : "32px",
+            paddingTop: isMobile ? "16px" : "32px",
+            marginBottom: isMobile ? "40px" : "0px",
+          }}
+        >
           © 2026 La Comarca. Todos los derechos reservados.
         </div>
       </footer>
