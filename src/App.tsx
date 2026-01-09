@@ -70,15 +70,11 @@ const AppContent = () => {
 
       <DesktopNav onNavigate={handleNavigate} />
 
-      <div className="md:hidden sticky top-0 w-full z-40 bg-stone-900 text-white p-4 flex justify-between items-center shadow-md">
+      <div className="md:hidden sticky top-0 w-full z-40 bg-stone-900 text-white p-4 flex justify-center items-center shadow-md">
         <ImageWithFallback
           src={logoImage}
           alt="La Comarca Logo"
           className="h-12 w-auto object-contain rounded-full"
-        />
-        <Menu
-          className="cursor-pointer"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         />
       </div>
 

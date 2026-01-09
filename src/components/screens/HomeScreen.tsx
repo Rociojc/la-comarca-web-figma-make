@@ -2,14 +2,22 @@ import React from "react";
 import { Bed, Utensils, MapPin, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "../ui/ImageWithFallback";
 import heroImageDesktop from "../../assets/hero-image-desktop.png";
+import { useIsMobile } from "../ui/use-mobile";
 
 export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
   onNavigate,
 }) => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="fade-in pb-24">
       {/* Hero Section Desktop Enhanced */}
-      <div className="relative h-[50vh] md:h-[80vh] w-full bg-stone-900 md:rounded-b-[4rem] rounded-b-[2rem] overflow-hidden mb-12 shadow-2xl">
+      <div
+        className="relative w-full bg-stone-900 md:rounded-b-[4rem] rounded-b-[2rem] overflow-hidden mb-12 shadow-2xl"
+        style={{
+          height: isMobile ? "70vh" : "80vh",
+        }}
+      >
         <ImageWithFallback
           src={heroImageDesktop}
           alt="hero-image-desktop"
@@ -17,14 +25,14 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone-900 via-transparent to-transparent opacity-90"></div>
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <div className="animate-fade-in-up">
+          <div className="animate-fade-in-up w-full">
             <p className="text-stone-200 font-medieval text-xl md:text-3xl mb-4 tracking-widest uppercase drop-shadow-md">
               Bienvenidos a
             </p>
             <h1 className="text-6xl md:text-9xl font-medieval text-stone-50 leading-tight mb-6 drop-shadow-2xl">
               La Comarca
             </h1>
-            <p className="text-stone-200 font-lato text-lg md:text-2xl max-w-2xl mx-auto font-light leading-relaxed">
+            <p className="text-stone-200 font-lato text-lg md:text-2xl max-w-2xl mx-auto font-light leading-relaxed px-4">
               Donde la comodidad del hogar se encuentra con la magia de la
               Tierra Media.
             </p>
@@ -32,8 +40,13 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
               <button
                 onClick={() => {
                   const phone = import.meta.env.VITE_WHATSAPP_PHONE;
-                  const message = encodeURIComponent(import.meta.env.VITE_WHATSAPP_HOME_MESSAGE);
-                  window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+                  const message = encodeURIComponent(
+                    import.meta.env.VITE_WHATSAPP_HOME_MESSAGE
+                  );
+                  window.open(
+                    `https://wa.me/${phone}?text=${message}`,
+                    "_blank"
+                  );
                 }}
                 className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20 cursor-pointer"
               >
@@ -52,7 +65,10 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
 
       <div className="max-w-7xl mx-auto px-6">
         {/* Features Section Desktop Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 -mt-20 relative z-10">
+        <div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 relative z-10"
+          style={{ marginTop: isMobile ? "-4rem" : "-5rem" }}
+        >
           <div className="bg-stone-50 p-8 rounded-2xl shadow-xl border border-stone-200 hover:translate-y-2 transition-transform duration-300 flex flex-col items-center text-center">
             <div className="bg-emerald-400/20 p-4 rounded-full text-emerald-400 mb-4">
               <Bed size={32} />
@@ -92,7 +108,14 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
 
         {/* Featured Experiences */}
         <div className="mb-16">
-          <div className="flex justify-between items-end mb-8">
+          <div 
+            className="flex mb-8 gap-4"
+            style={{ 
+              flexDirection: isMobile ? 'column' : 'row',
+              justifyContent: 'space-between',
+              alignItems: isMobile ? 'flex-start' : 'flex-end'
+            }}
+          >
             <div>
               <h3 className="font-medieval text-4xl text-stone-800 mb-2">
                 Experiencias Destacadas
