@@ -11,7 +11,10 @@ export const RoomsScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
   };
 
   return (
-    <div className="fade-in pb-24 md:pt-12 max-w-7xl mx-auto px-6">
+    <div
+      className="fade-in max-w-7xl mx-auto px-6"
+      style={{ paddingTop: "48px", paddingBottom: "48px" }}
+    >
       <div className="text-center mb-12">
         <h2 className="font-medieval text-4xl md:text-5xl text-stone-800 mb-4">
           Nuestros Aposentos
