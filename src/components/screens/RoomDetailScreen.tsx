@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Room } from "../../data/rooms";
 import { ImageWithFallback } from "../ui/ImageWithFallback";
+import { useIsMobile } from "../ui/use-mobile";
 
 interface RoomDetailScreenProps {
   room: Room;
@@ -25,12 +26,13 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
   onBack,
   onBook,
 }) => {
+  const isMobile = useIsMobile();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // new: responsive inline height to avoid CSS interference
   const [imageHeight, setImageHeight] = useState<number>(() =>
-    typeof window !== "undefined" && window.innerWidth >= 768 ? 500 : 400
+    typeof window !== "undefined" && window.innerWidth >= 768 ? 500 : 300
   );
 
   // Default to using the main image repeated if no images array exists (fallback)
@@ -76,13 +78,13 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
 
   useEffect(() => {
     const handleResize = () =>
-      setImageHeight(window.innerWidth >= 768 ? 500 : 400);
+      setImageHeight(window.innerWidth >= 768 ? 500 : 300);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div className="fade-in pb-24 pt-8 max-w-7xl mx-auto px-6 relative">
+    <div className="fade-in pb-24 pt-8 max-w-7xl mx-auto px-4 md:px-6 relative">
       <button
         onClick={onBack}
         className="flex items-center gap-2 text-stone-600 hover:text-emerald-400 mb-6 font-medieval text-lg transition-colors cursor-pointer"
@@ -90,7 +92,10 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
         <ArrowLeft size={20} /> Volver a Aposentos
       </button>
 
-      <div className="grid grid-cols-2 gap-12">
+      <div
+        className="grid gap-8 md:gap-12"
+        style={{ gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr" }}
+      >
         {/* Left Column: Images */}
         <div className="space-y-4">
           <div
@@ -109,7 +114,7 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-4">
+          <div className={`grid grid-cols-4 ${isMobile ? "gap-2" : "gap-4"}`}>
             {images.slice(0, 4).map((img, idx) => {
               const isLastSlot = idx === 3;
               const remainingCount = images.length - 4;
@@ -117,7 +122,7 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
               return (
                 <div
                   key={idx}
-                  className={`rounded-xl overflow-hidden shadow-md h-32 border border-stone-200 cursor-pointer transition-all relative group 
+                  className={`rounded-xl overflow-hidden shadow-md h-32 border border-stone-200 cursor-pointer transition-all relative group
           ${idx === 0 ? "ring-2 ring-emerald-400" : "hover:opacity-90"}`}
                   onClick={() => openGallery(idx)}
                 >
@@ -129,10 +134,10 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
 
                   {isLastSlot && remainingCount > 0 && (
                     <div className="absolute inset-0 bg-stone-900/70 backdrop-blur-[1px] flex flex-col items-center justify-center text-white border-2 border-emerald-400/50 rounded-xl">
-                      <span className="text-xl font-bold">
+                      <span className="text-lg md:text-xl font-bold">
                         +{remainingCount}
                       </span>
-                      <span className="text-xl tracking-tighter font-bold">
+                      <span className="text-xs md:text-xl tracking-tighter font-bold">
                         Ver Más
                       </span>
                     </div>
@@ -149,41 +154,67 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
         </div>
 
         {/* Right Column: Details */}
-        <div className="space-y-8">
+        <div className={`space-y-8`}>
           <div>
             <div className="flex justify-between items-start">
-              <h1 className="font-medieval text-4xl md:text-5xl text-stone-900 mb-2">
+              <h1
+                className={`font-medieval text-stone-900 mb-2 ${
+                  isMobile ? "text-3xl" : "md:text-5xl"
+                }`}
+              >
                 {room.title}
               </h1>
             </div>
           </div>
 
-          <div className="flex flex-wrap gap-4 border-y border-stone-200 py-6 mb-4">
+          <div
+            className={`flex flex-wrap gap-4 border-y border-stone-200 py-6 mb-4`}
+          >
             <div className="flex items-center gap-2 text-stone-700">
-              <div className="bg-stone-100 rounded-full">
-                <Users size={20} />
+              <div className="bg-stone-100 rounded-full p-1">
+                <Users size={18} />
               </div>
-              <span className="font-bold">{room.maxGuests || 2} Huéspedes</span>
+              <span
+                className={`font-bold ${isMobile ? "text-sm" : "text-base"}`}
+              >
+                {room.maxGuests || 2} Huéspedes
+              </span>
             </div>
             <div className="flex items-center gap-2 text-stone-700">
-              <div className="bg-stone-100 rounded-full">
-                <Maximize size={20} />
+              <div className="bg-stone-100 rounded-full p-1">
+                <Maximize size={18} />
               </div>
-              <span className="font-bold">{room.size || "45 m²"}</span>
+              <span
+                className={`font-bold ${isMobile ? "text-sm" : "text-base"}`}
+              >
+                {room.size || "45 m²"}
+              </span>
             </div>
           </div>
 
           <div>
-            <p className="text-stone-600 leading-relaxed font-lato text-lg">
+            <p
+              className={`text-stone-600 leading-relaxed font-lato ${
+                isMobile ? "text-base" : "text-lg"
+              }`}
+            >
               {room.description || "Un lugar maravilloso para descansar."}
             </p>
           </div>
 
           <div>
-            <h3 className="font-medieval text-2xl text-stone-800 mt-4 mb-4">
+            <h3
+              className={`font-medieval text-stone-800 mt-4 mb-4 ${
+                isMobile ? "text-xl" : "text-2xl"
+              }`}
+            >
               Dones del Aposento:
             </h3>
-            <div className="grid grid-cols-2 gap-3">
+            <div
+              className={`grid ${
+                isMobile ? "grid-cols-1" : "grid-cols-2"
+              } gap-3`}
+            >
               {(room.features || ["Cama cómoda", "Desayuno"]).map(
                 (feature, idx) => (
                   <div
@@ -192,7 +223,9 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
                   >
                     <Check size={18} className="text-emerald-500" />
                     <div>
-                      <p className="text-lg">{feature.label}</p>
+                      <p className={`${isMobile ? "text-base" : "text-lg"}`}>
+                        {feature.label}
+                      </p>
                       <p className="uppercase text-xs text-stone-400">
                         {feature.sub}
                       </p>
@@ -202,30 +235,48 @@ export const RoomDetailScreen: React.FC<RoomDetailScreenProps> = ({
               )}
               <div className="flex items-center gap-2 text-stone-600">
                 <Wifi size={18} className="text-emerald-500" />{" "}
-                <span>Palantir-Fi (Conexión Mágica)</span>
+                <span className={`${isMobile ? "text-base" : "text-lg"}`}>
+                  Palantir-Fi (Conexión Mágica)
+                </span>
               </div>
               <div className="flex items-center gap-2 text-stone-600">
                 <Coffee size={18} className="text-emerald-500" />{" "}
-                <span>Té de la tarde</span>
+                <span className={`${isMobile ? "text-base" : "text-lg"}`}>
+                  Té de la tarde
+                </span>
               </div>
             </div>
           </div>
 
           <div className="bg-stone-900 rounded-2xl p-6 text-white flex flex-col md:flex-row items-center justify-between shadow-xl gap-4 mt-4">
-            <div>
-              <p className="text-stone-400 text-sm uppercase mb-1">
+            <div className={`${isMobile ? "text-center" : "text-left"}`}>
+              <p
+                className={`text-stone-400 uppercase mb-1 ${
+                  isMobile ? "text-xs" : "text-sm"
+                }`}
+              >
                 Valor de la estancia
               </p>
-              <p className="text-3xl text-amber-400">
+              <p
+                className={`text-amber-400 ${
+                  isMobile ? "text-2xl" : "text-3xl"
+                }`}
+              >
                 {room.price}{" "}
-                <span className="text-stone-400 text-sm font-normal italic">
+                <span
+                  className={`text-stone-400 font-normal italic ${
+                    isMobile ? "text-xs" : "text-sm"
+                  }`}
+                >
                   / por noche
                 </span>
               </p>
             </div>
             <button
               onClick={onBook}
-              className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20 cursor-pointer"
+              className={`bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20 cursor-pointer ${
+                isMobile ? "text-lg" : "text-xl"
+              }`}
             >
               Reservar Aposento
             </button>
