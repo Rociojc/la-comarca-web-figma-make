@@ -10,7 +10,7 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
   const isMobile = useIsMobile();
 
   return (
-    <div className="fade-in pb-24">
+    <div className="fade-in">
       {/* Hero Section Desktop Enhanced */}
       <div
         className="relative w-full bg-stone-900 md:rounded-b-[4rem] rounded-b-[2rem] overflow-hidden mb-12 shadow-2xl"
@@ -108,12 +108,12 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
 
         {/* Featured Experiences */}
         <div className="mb-16">
-          <div 
+          <div
             className="flex mb-8 gap-4"
-            style={{ 
-              flexDirection: isMobile ? 'column' : 'row',
-              justifyContent: 'space-between',
-              alignItems: isMobile ? 'flex-start' : 'flex-end'
+            style={{
+              flexDirection: isMobile ? "column" : "row",
+              justifyContent: "space-between",
+              alignItems: isMobile ? "flex-start" : "flex-end",
             }}
           >
             <div>
