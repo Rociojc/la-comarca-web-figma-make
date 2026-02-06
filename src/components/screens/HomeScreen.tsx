@@ -2,6 +2,10 @@ import React from "react";
 import { Bed, Utensils, MapPin, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "../ui/ImageWithFallback";
 import heroImageDesktop from "../../assets/hero-image-desktop.png";
+import hogueraImg from "../../assets/home/experience/la-hoguera/portada-carrusel-la-hoguera.webp";
+import ponyImg from "../../assets/home/experience/pony-pisador/portada-carrusel-pony-pisador.webp";
+import senderosImg from "../../assets/home/experience/senderos/portada-carrusel-senderos.webp";
+import nieblaImg from "../../assets/home/experience/reino-de-niebla/portada-carrusel-reino-de-niebla.webp";
 import { useIsMobile } from "../ui/use-mobile";
 
 export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
@@ -41,11 +45,11 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
                 onClick={() => {
                   const phone = import.meta.env.VITE_WHATSAPP_PHONE;
                   const message = encodeURIComponent(
-                    import.meta.env.VITE_WHATSAPP_HOME_MESSAGE
+                    import.meta.env.VITE_WHATSAPP_HOME_MESSAGE,
                   );
                   window.open(
                     `https://wa.me/${phone}?text=${message}`,
-                    "_blank"
+                    "_blank",
                   );
                 }}
                 className="bg-amber-400 hover:bg-amber-500 text-stone-50 font-medieval px-8 py-3 rounded-full text-xl transition-all shadow-lg hover:shadow-amber-400/20 cursor-pointer"
@@ -88,7 +92,7 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
               Gastronomía
             </h3>
             <p className="font-lato text-stone-600">
-              Disfruta de hasta 7 comidas al día, preparadas con ingredientes
+              Disfruta de deliciosas comidas preparadas con ingredientes
               locales.
             </p>
           </div>
@@ -118,34 +122,30 @@ export const HomeScreen: React.FC<{ onNavigate: (path: string) => void }> = ({
           >
             <div>
               <h3 className="font-medieval text-4xl text-stone-800 mb-2">
-                Experiencias Destacadas
+                Experiencias Legendarias
               </h3>
               <p className="font-lato text-stone-500">
                 Más allá de una simple estancia.
               </p>
             </div>
-            <button className="text-emerald-400 hover:text-emerald-500 font-lato font-bold flex items-center gap-1 group">
-              Ver todas las actividades{" "}
-              <ChevronRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                title: "Tour a Hobbiton",
-                img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop",
+                title: "Crónicas al Calor de la Hoguera",
+                img: hogueraImg,
               },
               {
-                title: "Cata de Vinos",
-                img: "https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=400&auto=format&fit=crop",
+                title: "La Posada del Pony Pisador",
+                img: ponyImg,
               },
               {
-                title: "Taller de Forja",
-                img: "https://images.unsplash.com/photo-1596627689623-2882196191b6?q=80&w=400&auto=format&fit=crop",
+                title: "Senderos de Piedra y Memoria",
+                img: senderosImg,
               },
               {
-                title: "Noche de Cuentos",
-                img: "https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?q=80&w=400&auto=format&fit=crop",
+                title: "Ascenso al Reino de la Niebla",
+                img: nieblaImg,
               },
             ].map((item, idx) => (
               <div
